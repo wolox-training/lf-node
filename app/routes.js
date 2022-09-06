@@ -1,8 +1,9 @@
 // const controller = require('./controllers/controller');
 const { healthCheck } = require('./controllers/healthCheck');
-const { signUp } = require('./controllers/users');
+const { signUp, signIn } = require('./controllers/users');
 
 exports.init = app => {
   app.get('/health', healthCheck);
-  app.post('/signUp', signUp);
+  app.post('/users', signUp);
+  app.post('/users/sessions', signIn);
 };

@@ -8,3 +8,9 @@ exports.createUser = userParams => {
     throw databaseError(error.message);
   });
 };
+exports.findUser = emailfind => {
+  info('Calling users.createUser');
+  return user.findOne({ where: { email: emailfind } }).catch(error => {
+    throw databaseError(error.message);
+  });
+};
