@@ -6,16 +6,12 @@ const HTTP_CODES = require('../../config/codes');
 
 exports.signUp = (req, res) => {
   info('Sign-Up');
-  if (req.body.password.length < 8) {
-    res.status(HTTP_CODES.BAD_REQUEST).json({ message: 'Password must be 8 characters or more' });
-    return;
-  }
   createUser(req.body)
     .then(user => {
       const token = jwt.sign({ user }, process.env.AUTH_SECRET, {
         expiresIn: process.env.AUTH_EXPIRES
       });
-      res.status(HTTP_CODES.CREATED).json({ message: 'User was created', token, user: req.body.firstname });
+      res.status(HTTP_CODES.CREATED).json({ message: 'User was created', token, email: req.body.email });
     })
     .catch(error => {
       res.status(HTTP_CODES.BAD_REQUEST).json(error);
