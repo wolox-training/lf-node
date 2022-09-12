@@ -6,7 +6,7 @@ exports.validateResult = (req, res, next) => {
     next();
     return;
   } catch (err) {
-    res.status(403);
-    res.send({ errors: err.array() });
+    res.status(400);
+    res.json({ message: err.array() });
   }
 };

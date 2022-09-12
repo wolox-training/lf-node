@@ -3,10 +3,10 @@ const { factory } = require('factory-girl');
 const User = require('../../app/models').Users;
 
 factory.define('user', User, () => ({
-  firstName: 'Lucas',
-  lastName: 'Fozzatti',
-  email: 'dasdwsa@wolox.com',
-  password: 'dsaddsfdsadss'
+  firstName: 'Testing',
+  lastName: 'Testarin',
+  email: 'testing@wolox.com',
+  password: '12345678t'
 }));
 
 module.exports = {
