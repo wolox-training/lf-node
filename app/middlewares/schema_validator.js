@@ -1,40 +1,41 @@
 const { check } = require('express-validator');
-const { validateResult } = require('../helpers/validateHelper');
+const { validateResult } = require('../helpers/validate');
+const { error } = require('../../config/messages');
 
 exports.validateCreate = [
   check('firstName')
     .exists()
     .not()
     .isEmpty()
-    .withMessage('The firstName field cannot be empty')
+    .withMessage(error.empty)
     .isAlphanumeric()
     .isLength({ min: 3 })
-    .withMessage('must be at least 3 chars long'),
+    .withMessage(error.nameCharsMissing),
   check('lastName')
     .exists()
     .not()
     .isEmpty()
-    .withMessage('The lastName field cannot be empty')
+    .withMessage(error.empty)
     .isAlphanumeric()
     .isLength({ min: 3 })
-    .withMessage('must be at least 3 chars long'),
+    .withMessage(error.nameCharsMissing),
   check('email')
     .exists()
     .not()
     .isEmpty()
-    .withMessage('The email field cannot be empty')
+    .withMessage(error.empty)
     .isEmail()
-    .withMessage('that is not a valid email')
-    .matches(/(wolox)/)
-    .withMessage('it needs to be a mail from wolox'),
+    .withMessage(error.invalidEmail)
+    .matches(/(@wolox.com)/)
+    .withMessage(error.notWoloxEmail),
   check('password')
     .exists()
     .not()
     .isEmpty()
-    .withMessage('The password field cannot be empty')
+    .withMessage(error.empty)
     .isAlphanumeric()
     .isLength({ min: 8 })
-    .withMessage('must be at least 8 chars long'),
+    .withMessage(error.passwordCharsMissing),
   (req, res, next) => {
     validateResult(req, res, next);
   }

@@ -1,12 +1,12 @@
 const { factory } = require('factory-girl');
-// const faker = require('@faker-js/faker');
+const { faker } = require('@faker-js/faker');
 const User = require('../../app/models').Users;
 
 factory.define('user', User, () => ({
-  firstName: 'Testing',
-  lastName: 'Testarin',
-  email: 'testing@wolox.com',
-  password: '12345678t'
+  firstName: faker.name.firstName(),
+  lastName: faker.name.lastName(),
+  email: faker.internet.email(null, null, 'wolox.com.ar'),
+  password: factory.chance('string', { length: 8, alpha: true, numeric: true })
 }));
 
 module.exports = {

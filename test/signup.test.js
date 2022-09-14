@@ -5,7 +5,6 @@ const userFactory = require('./factory/userFactory');
 const objects = require('../config/userObjects');
 
 describe('POST /users', () => {
-
   it('responds with a success status code when data sent meets all the criteria', async () => {
     await userFactory.create();
     const response = await request(app)
@@ -45,7 +44,6 @@ describe('POST /users', () => {
     const randomParam = params[Math.floor(Math.random() * params.length)];
     const testParams = objects.succesUser;
     testParams[`${randomParam}`] = '';
-    console.log(testParams);
     const response = await request(app)
       .post('/users')
       .send(testParams);
