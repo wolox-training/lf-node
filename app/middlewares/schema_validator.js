@@ -1,41 +1,41 @@
 const { check } = require('express-validator');
 const { validateResult } = require('../helpers/validate');
-const { userNotOk } = require('../../config/messages');
+const { error } = require('../../config/messages');
 
 exports.validateCreate = [
   check('firstName')
     .exists()
     .not()
     .isEmpty()
-    .withMessage(userNotOk.empty)
+    .withMessage(error.empty)
     .isAlphanumeric()
     .isLength({ min: 3 })
-    .withMessage(userNotOk.nameCharsMissing),
+    .withMessage(error.nameCharsMissing),
   check('lastName')
     .exists()
     .not()
     .isEmpty()
-    .withMessage(userNotOk.empty)
+    .withMessage(error.empty)
     .isAlphanumeric()
     .isLength({ min: 3 })
-    .withMessage(userNotOk.nameCharsMissing),
+    .withMessage(error.nameCharsMissing),
   check('email')
     .exists()
     .not()
     .isEmpty()
-    .withMessage(userNotOk.empty)
+    .withMessage(error.empty)
     .isEmail()
-    .withMessage(userNotOk.invalidEmail)
+    .withMessage(error.invalidEmail)
     .matches(/(@wolox.com)/)
-    .withMessage(userNotOk.notWoloxEmail),
+    .withMessage(error.notWoloxEmail),
   check('password')
     .exists()
     .not()
     .isEmpty()
-    .withMessage(userNotOk.empty)
+    .withMessage(error.empty)
     .isAlphanumeric()
     .isLength({ min: 8 })
-    .withMessage(userNotOk.passwordCharsMissing),
+    .withMessage(error.passwordCharsMissing),
   (req, res, next) => {
     validateResult(req, res, next);
   }
