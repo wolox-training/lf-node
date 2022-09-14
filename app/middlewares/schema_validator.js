@@ -26,7 +26,7 @@ exports.validateCreate = [
     .withMessage(userNotOk.empty)
     .isEmail()
     .withMessage(userNotOk.invalidEmail)
-    .matches(/(wolox)/)
+    .matches(/(@wolox.com)/)
     .withMessage(userNotOk.notWoloxEmail),
   check('password')
     .exists()
