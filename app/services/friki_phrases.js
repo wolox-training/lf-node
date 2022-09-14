@@ -1,4 +1,5 @@
 const axios = require('axios');
+const { weetNotOk } = require('../../config/messages');
 
 exports.getPhrase = async res => {
   try {
@@ -6,7 +7,7 @@ exports.getPhrase = async res => {
     return apiResponse.data;
   } catch (error) {
     console.error(error);
-    res.status(500).send('error getting a weet');
+    res.status(500).send(weetNotOk.errorGetting);
     return error;
   }
 };

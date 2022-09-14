@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
           },
           len: {
             args: [3, 255],
-            msg: 'The name must be between 3 and 255 characters'
+            msg: 'The firstName must be between 3 and 255 characters'
           }
         }
       },
@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
           },
           len: {
             args: [3, 255],
-            msg: 'The name must be between 3 and 255 characters'
+            msg: 'The lastName must be between 3 and 255 characters'
           }
         }
       },
@@ -69,7 +69,7 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           len: {
             args: [8, 255],
-            msg: 'The name must be between 8 and 255 characters'
+            msg: 'The password must be between 8 and 255 characters'
           }
         }
       }
