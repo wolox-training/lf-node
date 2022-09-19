@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { info } = require('../logger');
-const { createUser, findUser } = require('../services/users');
+const { createUser, findUser, findAll } = require('../services/users');
 const HTTP_CODES = require('../../config/codes');
 const { success, error } = require('../../config/messages');
 
@@ -40,4 +40,11 @@ exports.signIn = (req, res) => {
     .catch(err => {
       res.status(HTTP_CODES.INTERNAL_ERROR).json(err);
     });
+};
+
+exports.getAllUsers = (req, res, next) => {
+  const { page, limit } = req.query;
+  findAll(page, limit)
+    .then(users => res.send({ users }))
+    .catch(next);
 };
