@@ -61,3 +61,10 @@ exports.createAdmin = async (req, res) => {
     return res.status(HTTP_CODES.INTERNAL_ERROR).json(err);
   }
 };
+
+exports.getAllUsers = (req, res, next) => {
+  const { page, limit } = req.query;
+  findAll(page, limit)
+    .then(users => res.send({ users }))
+    .catch(next);
+};
