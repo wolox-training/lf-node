@@ -41,4 +41,3 @@ describe('POST /users', () => {
     expect.objectContaining('message', 'it needs to be a valid token');
   });
 });
-
