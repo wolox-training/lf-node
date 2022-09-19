@@ -16,5 +16,12 @@ module.exports = {
     lastName: 'Testarin',
     email: 'testing@olox.com',
     password: '1234t'
+  },
+  createUserAdmin: {
+    firstName: 'Testing',
+    lastName: 'Testarin',
+    email: 'testin@wolox.com',
+    password: '12345678t',
+    role: 'admin'
   }
 };
