@@ -1,6 +1,7 @@
 module.exports = {
   success: {
-    created: 'user was created'
+    created: 'user was created',
+    updated: 'user was updated'
   },
   error: {
     notFound: 'user not found',
@@ -12,6 +13,7 @@ module.exports = {
     notWoloxEmail: 'it needs to be a mail from wolox',
     errorGetting: 'error getting a weet',
     invalidToken: 'it needs to be a valid token',
-    emptyToken: 'a token is required'
+    emptyToken: 'a token is required',
+    notAdmin: 'you do not have admin permissions'
   }
 };

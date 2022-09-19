@@ -72,6 +72,12 @@ module.exports = (sequelize, DataTypes) => {
             msg: 'The password must be between 8 and 255 characters'
           }
         }
+      },
+      role: {
+        type: DataTypes.ENUM,
+        values: ['user', 'admin'],
+        allowNull: false,
+        defaultValue: 'user'
       }
     },
     {
