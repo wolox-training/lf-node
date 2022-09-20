@@ -21,6 +21,7 @@ describe('POST /users', () => {
       .get('/allusers')
       .set({ Authorization: token });
     expect(response.statusCode).toBe(200);
+    expect(response.body.users.length).toBe(1);
   });
   it('responds with a success status code when the request does not have the authorization token', async () => {
     const response = await request(app)
@@ -39,5 +40,16 @@ describe('POST /users', () => {
       });
     expect(response.statusCode).toBe(404);
     expect.objectContaining('message', 'it needs to be a valid token');
+  });
+  it('responds with a success status code and return the number of users requested on the page', async () => {
+    const user = await userFactory.create();
+    const token = jwt.sign(user.dataValues.email, process.env.AUTH_SECRET);
+    await userFactory.createMany(6);
+    const response = await request(app)
+      .get('/allusers')
+      .set({ Authorization: token })
+      .query({ limit: 3, page: 1 });
+    expect(response.statusCode).toBe(200);
+    expect(response.body.users.length).toBe(3);
   });
 });
