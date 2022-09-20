@@ -49,7 +49,6 @@ describe('POST /users', () => {
   it('responds with an error status code when I try to update the role of a pre-existing user without having admin role', async () => {
     const admin = await userFactory.create();
     const user = await userFactory.create();
-    console.log(user.data);
     const token = jwt.sign(
       { user: { email: admin.dataValues.email, role: admin.dataValues.role } },
       process.env.AUTH_SECRET
