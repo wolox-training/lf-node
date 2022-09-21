@@ -2,7 +2,7 @@ const { check } = require('express-validator');
 const { validateResult } = require('../helpers/validate');
 const { error } = require('../../config/messages');
 
-exports.validateCreate = [
+exports.validateUser = [
   check('firstName')
     .exists()
     .not()
