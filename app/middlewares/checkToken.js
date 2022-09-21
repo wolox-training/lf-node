@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const jwt_decode = require('jwt-decode');
 const HTTP_CODES = require('../../config/codes');
 const { error } = require('../../config/messages');
 
@@ -13,6 +14,8 @@ exports.verifyJWT = (req, res, next) => {
       res.status(HTTP_CODES.NOT_FOUND).json({ message: error.invalidToken });
       return;
     }
+    const decoded = jwt_decode(token);
+    req.id = decoded.user.id;
     next();
   });
 };

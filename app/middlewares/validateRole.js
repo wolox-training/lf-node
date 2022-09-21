@@ -6,7 +6,6 @@ exports.validateRole = (req, res, next) => {
   const token = req.headers.authorization;
   console.log(token);
   const decoded = jwt_decode(token);
-  console.log('hola', decoded);
   if (decoded.user.role !== 'admin') {
     res.status(HTTP_CODES.UNAUTHORIZED).json({ message: error.notAdmin });
     return;
