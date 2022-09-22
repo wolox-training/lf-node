@@ -15,7 +15,7 @@ describe('POST /users', () => {
   it('responds with error status code and internal_code when the password is too short', async () => {
     const response = await request(app)
       .post('/users')
-      .send(objects.withShortPassword);
+      .send({ ...objects.succesUser, password: objects.shortPassword });
     expect(response.statusCode).toBe(400);
     expect.objectContaining('message', [
       { location: 'body', msg: 'must be at least 8 chars long', param: 'password', value: 'dsf' }
@@ -24,7 +24,7 @@ describe('POST /users', () => {
   it('responds with expected error status code and internal_code when the email is not from Wolox domain', async () => {
     const response = await request(app)
       .post('/users')
-      .send(objects.withNonWoloxEmail);
+      .send({ ...objects.succesUser, password: objects.NonWoloxEmail });
     expect(response.statusCode).toBe(400);
     expect.objectContaining('message', [
       { location: 'body', msg: 'it needs to be a mail from wolox', param: 'email', value: 'Test@olox.com' }

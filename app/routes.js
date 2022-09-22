@@ -1,6 +1,6 @@
 const { healthCheck } = require('./controllers/healthCheck');
 const { signUp, signIn, getAllUsers, createAdmin } = require('./controllers/users');
-const { getWeeter } = require('./controllers/weeters');
+const { getWeeter } = require('./controllers/weets');
 const { validateCreate } = require('./middlewares/schema_validator');
 const { verifyJWT } = require('./middlewares/checkToken');
 const { validateRole } = require('./middlewares/validateRole');
