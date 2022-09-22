@@ -17,18 +17,14 @@ describe('POST /users', () => {
       .post('/users')
       .send({ ...objects.succesUser, password: objects.shortPassword });
     expect(response.statusCode).toBe(400);
-    expect.objectContaining('message', [
-      { location: 'body', msg: 'must be at least 8 chars long', param: 'password', value: 'dsf' }
-    ]);
+    expect(response.body.message[0].msg).toBe('must be at least 8 chars long');
   });
   it('responds with expected error status code and internal_code when the email is not from Wolox domain', async () => {
     const response = await request(app)
       .post('/users')
-      .send({ ...objects.succesUser, password: objects.NonWoloxEmail });
+      .send({ ...objects.succesUser, email: objects.NonWoloxEmail });
     expect(response.statusCode).toBe(400);
-    expect.objectContaining('message', [
-      { location: 'body', msg: 'it needs to be a mail from wolox', param: 'email', value: 'Test@olox.com' }
-    ]);
+    expect(response.body.message[0].msg).toBe('it needs to be a mail from wolox');
   });
   it('responds with expected error status code and internal_code when there is an existing user with same email', async () => {
     const userParams = await userFactory.create();
@@ -48,8 +44,6 @@ describe('POST /users', () => {
       .post('/users')
       .send(testParams);
     expect(response.statusCode).toBe(400);
-    expect.objectContaining('message', [
-      { location: 'body', msg: `The${randomParam}field cannot be empty`, param: randomParam, value: '' }
-    ]);
+    expect(response.body.message[0].msg).toBe('The field cannot be empty');
   });
 });
