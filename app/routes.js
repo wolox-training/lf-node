@@ -1,9 +1,12 @@
-const { healthCheck } = require('./controllers/healthCheck');
-const { signUp, signIn, getAllUsers, createAdmin } = require('./controllers/users');
-const { getWeeter } = require('./controllers/weets');
-const { validateCreate } = require('./middlewares/schema_validator');
-const { verifyJWT } = require('./middlewares/checkToken');
-const { validateRole } = require('./middlewares/validateRole');
+const {
+  healthCheck,
+  signUp,
+  signIn,
+  getAllUsers,
+  createAdmin,
+} = require('./controllers');
+const { verifyJWT, validateRole } = require('./middlewares');
+
 
 exports.init = app => {
   app.get('/health', healthCheck);
