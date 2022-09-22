@@ -1,5 +1,5 @@
 const { signUp, signIn, getAllUsers, createAdmin } = require('./users');
 const { healthCheck } = require('./healthCheck');
-const { getWeeter } = require('./weets');
+const { getWeet } = require('./weets');
 
-module.exports = { signUp, signIn, healthCheck, getAllUsers, createAdmin, getWeeter };
+module.exports = { signUp, signIn, healthCheck, getAllUsers, createAdmin, getWeet };
