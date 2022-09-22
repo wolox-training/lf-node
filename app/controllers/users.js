@@ -57,11 +57,11 @@ exports.createAdmin = (req, res) => {
         userParams.role = 'admin';
         createUser(userParams);
 
-        res.status(201).json({ message: success.created });
+        res.status(HTTP_CODES.CREATED).json({ message: success.created });
         return;
       }
       updateAdmin(user.dataValues.id);
-      res.status(201).json({ message: success.updated });
+      res.status(HTTP_CODES.CREATED).json({ message: success.updated });
     })
     .catch(err => {
       res.status(HTTP_CODES.INTERNAL_ERROR).json(err);

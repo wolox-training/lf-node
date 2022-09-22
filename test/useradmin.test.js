@@ -15,7 +15,7 @@ describe('POST /users', () => {
     const response = await request(app)
       .post('/users/admin')
       .set({ Authorization: token })
-      .send(objects.createUserAdmin);
+      .send({ ...objects.succesUser, role: objects.adminRole });
     expect(response.statusCode).toBe(201);
     expect.objectContaining('message', 'user was created');
   });
@@ -42,7 +42,7 @@ describe('POST /users', () => {
     const response = await request(app)
       .post('/users/admin')
       .set({ Authorization: token })
-      .send(objects.createUserAdmin);
+      .send({ ...objects.succesUser, role: objects.adminRole });
     expect(response.statusCode).toBe(401);
     expect.objectContaining('message', 'you do not have admin permissions');
   });
