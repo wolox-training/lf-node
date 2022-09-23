@@ -9,7 +9,7 @@ exports.validateCreate = [
     .isEmpty()
     .withMessage(error.empty)
     .isAlphanumeric()
-    .isLength({ min: 3 })
+    .isLength({ min: 2 })
     .withMessage(error.nameCharsMissing),
   check('lastName')
     .exists()
@@ -17,7 +17,7 @@ exports.validateCreate = [
     .isEmpty()
     .withMessage(error.empty)
     .isAlphanumeric()
-    .isLength({ min: 3 })
+    .isLength({ min: 2 })
     .withMessage(error.nameCharsMissing),
   check('email')
     .exists()

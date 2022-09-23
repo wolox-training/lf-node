@@ -11,7 +11,8 @@ exports.createUser = async userParams => {
       firstName: userParams.firstName,
       lastName: userParams.lastName,
       email: userParams.email,
-      password: await hashpass(userParams.password)
+      password: await hashpass(userParams.password),
+      role: userParams.role
     })
     .catch(error => {
       throw databaseError(error.message);
@@ -31,3 +32,9 @@ exports.findAll = (page = 1, limit = 10) =>
       info.error(error.message);
       throw databaseError(error.message);
     });
+
+exports.updateAdmin = user_id =>
+  user.update({ role: 'admin' }, { where: { id: user_id } }).catch(error => {
+    info.error(error.message);
+    throw databaseError(error.message);
+  });
