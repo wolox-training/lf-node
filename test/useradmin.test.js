@@ -17,7 +17,7 @@ describe('POST /users', () => {
       .set({ Authorization: token })
       .send({ ...objects.succesUser, role: objects.adminRole });
     expect(response.statusCode).toBe(201);
-    expect.objectContaining('message', 'user was created');
+    expect.objectContaining('message', 'successfuly created');
   });
   it('responds with a success status code when I try to update the role of a pre-existing user', async () => {
     const admin = await userFactory.create({ role: 'admin' });
@@ -31,7 +31,7 @@ describe('POST /users', () => {
       .set({ Authorization: token })
       .send(user.dataValues);
     expect(response.statusCode).toBe(201);
-    expect.objectContaining('message', 'user was updated');
+    expect.objectContaining('message', 'successfuly updated');
   });
   it('responds with an error code when I try to create a user without having admin role', async () => {
     const admin = await userFactory.create();
