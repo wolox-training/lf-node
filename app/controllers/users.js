@@ -32,7 +32,6 @@ exports.signIn = (req, res) => {
         const token = jwt.sign({ user }, process.env.AUTH_SECRET, {
           expiresIn: process.env.AUTH_EXPIRES
         });
-        console.log(user.rol);
         res.status(HTTP_CODES.OK).json({ user: user.firstName, token });
         return;
       }
