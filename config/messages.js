@@ -1,7 +1,7 @@
 module.exports = {
   success: {
-    created: 'user was created',
-    updated: 'user was updated'
+    created: 'successfuly created',
+    updated: 'successfuly updated'
   },
   error: {
     notFound: 'user not found',
@@ -14,6 +14,7 @@ module.exports = {
     errorGetting: 'error getting a weet',
     invalidToken: 'it needs to be a valid token',
     emptyToken: 'a token is required',
-    notAdmin: 'you do not have admin permissions'
+    notAdmin: 'you do not have admin permissions',
+    weetCharsMany: 'should be less than 140 characters'
   }
 };
