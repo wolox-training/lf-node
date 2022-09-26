@@ -42,11 +42,11 @@ exports.signIn = (req, res) => {
     });
 };
 
-exports.getAllUsers = (req, res, next) => {
+exports.getAllUsers = (req, res) => {
   const { page, limit } = req.query;
   findAll(page, limit)
     .then(users => res.send({ users }))
-    .catch(next);
+    .catch(err => err);
 };
 
 exports.createAdmin = (req, res) => {
