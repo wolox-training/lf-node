@@ -14,9 +14,10 @@ exports.createWeet = async (req, res) => {
     const phrase = await getPhrase();
     const weet = await createWeet(phrase, req.id);
     if (weet) {
-      res.status(HTTP_CODES.CREATED).json({ weet, message: success.created });
+      return res.status(HTTP_CODES.CREATED).json({ weet, message: success.created });
     }
+    return res.status(HTTP_CODES.CREATED).json({ weet, message: 'weet no creado' });
   } catch (err) {
-    res.status(HTTP_CODES.INTERNAL_ERROR).json({ message: err });
+    return res.status(HTTP_CODES.INTERNAL_ERROR).json({ message: err });
   }
 };
