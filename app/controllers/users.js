@@ -6,7 +6,7 @@ const HTTP_CODES = require('../../config/codes');
 const { success, error } = require('../../config/messages');
 
 exports.signUp = (req, res) => {
-  info('Sign-Up');
+  info('users.Sign-Up');
   createUser(req.body)
     .then(user => {
       const token = jwt.sign({ user }, process.env.AUTH_SECRET, {
@@ -20,7 +20,7 @@ exports.signUp = (req, res) => {
 };
 
 exports.signIn = (req, res) => {
-  info('Sign-In');
+  info('users.Sign-In');
   const { email, password } = req.body;
   return findUser(email)
     .then(user => {
@@ -39,6 +39,7 @@ exports.signIn = (req, res) => {
 };
 
 exports.getAllUsers = (req, res, next) => {
+  info('users.getAllUsers');
   const { page, limit } = req.query;
   return findAll(page, limit)
     .then(users => res.send({ users }))
@@ -46,6 +47,7 @@ exports.getAllUsers = (req, res, next) => {
 };
 
 exports.createAdmin = async (req, res) => {
+  info('users.createAdmin');
   const userParams = req.body;
   try {
     const user = await findUser(userParams.email);

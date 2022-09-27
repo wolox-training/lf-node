@@ -5,6 +5,7 @@ module.exports = {
   },
   error: {
     notFound: 'user not found',
+    weetNotCreated: 'the weet could not be created',
     wrongPassword: 'password incorrect',
     empty: 'The field cannot be empty',
     nameCharsMissing: 'must be at least 3 chars long',
@@ -14,7 +15,6 @@ module.exports = {
     errorGetting: 'error getting a weet',
     invalidToken: 'it needs to be a valid token',
     emptyToken: 'a token is required',
-    notAdmin: 'you do not have admin permissions',
-    weetCharsMany: 'should be less than 140 characters'
+    notAdmin: 'you do not have admin permissions'
   }
 };
