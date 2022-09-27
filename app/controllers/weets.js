@@ -13,12 +13,11 @@ exports.createWeet = async (req, res) => {
   try {
     const phrase = await getPhrase();
     if (phrase.joke.length > 140) {
-      res.status(HTTP_CODES.INTERNAL_ERROR).json({ message: error.weetCharsMany });
-      return;
+      return res.status(HTTP_CODES.INTERNAL_ERROR).json({ message: error.weetCharsMany });
     }
     const weet = await createWeet(phrase, req.id);
-    res.status(HTTP_CODES.CREATED).json({ weet, message: success.created });
+    return res.status(HTTP_CODES.CREATED).json({ weet, message: success.created });
   } catch (err) {
-    res.status(HTTP_CODES.INTERNAL_ERROR).json({ message: err });
+    return res.status(HTTP_CODES.INTERNAL_ERROR).json({ message: err });
   }
 };
