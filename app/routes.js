@@ -1,4 +1,12 @@
-const { healthCheck, signUp, signIn, getAllUsers, createAdmin, getWeet, createWeet } = require('./controllers');
+const {
+  healthCheck,
+  signUp,
+  signIn,
+  getAllUsers,
+  createAdmin,
+  getWeet,
+  createWeet
+} = require('./controllers');
 const { validateUser, verifyJWT, validateRole } = require('./middlewares');
 
 exports.init = app => {
