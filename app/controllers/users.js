@@ -22,48 +22,41 @@ exports.signUp = (req, res) => {
 exports.signIn = (req, res) => {
   info('Sign-In');
   const { email, password } = req.body;
-  findUser(email)
+  return findUser(email)
     .then(user => {
       if (!user) {
-        res.status(HTTP_CODES.NOT_FOUND).json({ message: error.notFound });
-        return;
+        return res.status(HTTP_CODES.NOT_FOUND).json({ message: error.notFound });
       }
       if (bcrypt.compareSync(password, user.password)) {
         const token = jwt.sign({ user }, process.env.AUTH_SECRET, {
           expiresIn: process.env.AUTH_EXPIRES
         });
-        res.status(HTTP_CODES.OK).json({ user: user.firstName, token });
-        return;
+        return res.status(HTTP_CODES.OK).json({ user: user.firstName, token });
       }
-      res.status(HTTP_CODES.UNAUTHORIZED).json({ message: error.wrongPassword });
+      return res.status(HTTP_CODES.UNAUTHORIZED).json({ message: error.wrongPassword });
     })
-    .catch(err => {
-      res.status(HTTP_CODES.INTERNAL_ERROR).json(err);
-    });
+    .catch(err => res.status(HTTP_CODES.INTERNAL_ERROR).json(err));
 };
 
 exports.getAllUsers = (req, res, next) => {
   const { page, limit } = req.query;
-  findAll(page, limit)
+  return findAll(page, limit)
     .then(users => res.send({ users }))
     .catch(next);
 };
 
-exports.createAdmin = (req, res) => {
+exports.createAdmin = async (req, res) => {
   const userParams = req.body;
-  findUser(userParams.email)
-    .then(user => {
-      if (!user) {
-        userParams.role = 'admin';
-        createUser(userParams);
-
-        res.status(HTTP_CODES.CREATED).json({ message: success.created });
-        return;
-      }
-      updateAdmin(user.dataValues.id);
-      res.status(HTTP_CODES.CREATED).json({ message: success.updated });
-    })
-    .catch(err => {
-      res.status(HTTP_CODES.INTERNAL_ERROR).json(err);
-    });
+  try {
+    const user = await findUser(userParams.email);
+    if (!user) {
+      userParams.role = 'admin';
+      await createUser(userParams);
+      return res.status(201).json({ message: success.created });
+    }
+    await updateAdmin(user.dataValues.id);
+    return res.status(201).json({ message: success.updated });
+  } catch (err) {
+    return res.status(HTTP_CODES.INTERNAL_ERROR).json(err);
+  }
 };
