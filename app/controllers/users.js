@@ -31,7 +31,7 @@ exports.signIn = (req, res) => {
         const token = jwt.sign({ user }, process.env.AUTH_SECRET, {
           expiresIn: process.env.AUTH_EXPIRES
         });
-        return res.status(HTTP_CODES.OK).json({ user: user.firstName, token });
+        return res.status(HTTP_CODES.SUCCESS).json({ user: user.firstName, token });
       }
       return res.status(HTTP_CODES.UNAUTHORIZED).json({ message: error.wrongPassword });
     })
@@ -54,10 +54,10 @@ exports.createAdmin = async (req, res) => {
     if (!user) {
       userParams.role = 'admin';
       await createUser(userParams);
-      return res.status(201).json({ message: success.created });
+      return res.status(HTTP_CODES.CREATED).json({ message: success.created });
     }
     await updateAdmin(user.dataValues.id);
-    return res.status(201).json({ message: success.updated });
+    return res.status(HTTP_CODES.CREATED).json({ message: success.updated });
   } catch (err) {
     return res.status(HTTP_CODES.INTERNAL_ERROR).json(err);
   }

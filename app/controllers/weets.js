@@ -8,7 +8,7 @@ exports.getWeet = async (req, res) => {
   info('weets.getWeet');
   const phrase = await getPhrase();
   console.log(phrase);
-  res.status(HTTP_CODES.OK).send(phrase);
+  res.status(HTTP_CODES.SUCCESS).send(phrase);
 };
 
 exports.createWeet = async (req, res) => {
