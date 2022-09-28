@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken');
-const HTTP_CODES = require('../../config/codes');
-const { error } = require('../../config/messages');
+const { HTTP_CODES, error } = require('../../config');
 
 exports.verifyJWT = (req, res, next) => {
   const token = req.headers.authorization;

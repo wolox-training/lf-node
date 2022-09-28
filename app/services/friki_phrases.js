@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { error } = require('../../config/messages');
+const { error } = require('../../config');
 
 exports.getPhrase = async res => {
   try {

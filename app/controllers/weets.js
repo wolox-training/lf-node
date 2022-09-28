@@ -1,7 +1,5 @@
-const { getPhrase } = require('../services/friki_phrases');
-const { createWeet } = require('../services/weets');
-const HTTP_CODES = require('../../config/codes');
-const { success, error } = require('../../config/messages');
+const { createWeet, getPhrase } = require('../services');
+const { HTTP_CODES, success, error } = require('../../config');
 const { info } = require('../logger');
 
 exports.getWeet = async (req, res) => {
