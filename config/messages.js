@@ -1,10 +1,11 @@
 module.exports = {
   success: {
-    created: 'user was created',
-    updated: 'user was updated'
+    created: 'successfuly created',
+    updated: 'successfuly updated'
   },
   error: {
     notFound: 'user not found',
+    weetNotCreated: 'the weet could not be created',
     wrongPassword: 'password incorrect',
     empty: 'The field cannot be empty',
     nameCharsMissing: 'must be at least 3 chars long',

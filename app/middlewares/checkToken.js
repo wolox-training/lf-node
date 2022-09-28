@@ -1,18 +1,16 @@
 const jwt = require('jsonwebtoken');
-const HTTP_CODES = require('../../config/codes');
-const { error } = require('../../config/messages');
+const { HTTP_CODES, error } = require('../../config');
 
 exports.verifyJWT = (req, res, next) => {
   const token = req.headers.authorization;
   if (!token) {
-    res.status(HTTP_CODES.BAD_REQUEST).json({ message: error.emptyToken });
-    return;
+    return res.status(HTTP_CODES.BAD_REQUEST).json({ message: error.emptyToken });
   }
-  jwt.verify(token.replace('Bearer ', ''), process.env.AUTH_SECRET, err => {
+  return jwt.verify(token.replace('Bearer ', ''), process.env.AUTH_SECRET, (err, decoded) => {
     if (err) {
-      res.status(HTTP_CODES.NOT_FOUND).json({ message: error.invalidToken });
-      return;
+      return res.status(HTTP_CODES.NOT_FOUND).json({ message: error.invalidToken });
     }
-    next();
+    req.id = decoded.user.id;
+    return next();
   });
 };

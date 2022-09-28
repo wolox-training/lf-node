@@ -7,7 +7,10 @@ const userFactory = require('./factory/userFactory');
 describe('POST /users', () => {
   it('responds with a success status code when data sent meets all the criteria', async () => {
     const user = await userFactory.create();
-    const token = jwt.sign(user.dataValues.email, process.env.AUTH_SECRET);
+    const token = jwt.sign(
+      { user: { email: user.dataValues.email, id: user.dataValues.id } },
+      process.env.AUTH_SECRET
+    );
     const response = await request(app)
       .get('/allusers')
       .set({ Authorization: token })
@@ -16,7 +19,10 @@ describe('POST /users', () => {
   });
   it('responds with a success status code when the request has an empty params', async () => {
     const user = await userFactory.create();
-    const token = jwt.sign(user.dataValues.email, process.env.AUTH_SECRET);
+    const token = jwt.sign(
+      { user: { email: user.dataValues.email, id: user.dataValues.id } },
+      process.env.AUTH_SECRET
+    );
     const response = await request(app)
       .get('/allusers')
       .set({ Authorization: token });
@@ -43,7 +49,10 @@ describe('POST /users', () => {
   });
   it('responds with a success status code and return the number of users requested on the page', async () => {
     const user = await userFactory.create();
-    const token = jwt.sign(user.dataValues.email, process.env.AUTH_SECRET);
+    const token = jwt.sign(
+      { user: { email: user.dataValues.email, id: user.dataValues.id } },
+      process.env.AUTH_SECRET
+    );
     await userFactory.createMany(6);
     const response = await request(app)
       .get('/allusers')
