@@ -1,3 +1,6 @@
+const { HTTP_CODES } = require('./codes');
+const { success, error } = require('./messages');
+
 const ENVIRONMENT = process.env.NODE_ENV || 'development';
 
 // eslint-disable-next-line global-require
@@ -50,4 +53,4 @@ const config = {
 };
 
 const customConfig = require(configFile).config;
-module.exports = deepMerge(config, customConfig);
+module.exports = { ...deepMerge(config, customConfig), HTTP_CODES, success, error };

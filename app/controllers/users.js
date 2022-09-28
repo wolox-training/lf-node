@@ -1,9 +1,8 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { info } = require('../logger');
-const { createUser, findUser, findAll, updateAdmin } = require('../services/users');
-const HTTP_CODES = require('../../config/codes');
-const { success, error } = require('../../config/messages');
+const { createUser, findUser, findAll, updateAdmin } = require('../services');
+const { HTTP_CODES, success, error } = require('../../config');
 
 exports.signUp = (req, res) => {
   info('users.Sign-Up');
