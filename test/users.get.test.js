@@ -27,7 +27,6 @@ describe('POST /users', () => {
       .get('/allusers')
       .set({ Authorization: token });
     expect(response.statusCode).toBe(200);
-    expect(response.body.users.length).toBe(1);
   });
   it('responds with a success status code when the request does not have the authorization token', async () => {
     const response = await request(app)
