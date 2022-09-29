@@ -32,10 +32,11 @@ exports.findRate = id => {
     });
 };
 
-exports.updateRate = user => {
+exports.updateRate = async user => {
   info('Calling weets.updateRate');
-  rating.update({ score: user.score }, { where: { userId: user.userId } }).catch(error => {
-    info.error(error.message);
-    throw databaseError(error.message);
-  });
+  await rating
+    .update({ score: user.score }, { where: { userId: user.userId, weetId: user.weetId } })
+    .catch(error => {
+      throw databaseError(error.message);
+    });
 };

@@ -18,7 +18,18 @@ module.exports = (sequelize, DataTypes) => {
     {
       weetId: DataTypes.INTEGER,
       userId: DataTypes.INTEGER,
-      score: DataTypes.INTEGER
+      score: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          isValue: (value, next) => {
+            if (value !== 1 && value !== -1) {
+              next(new Error('Email address already in use!'));
+            }
+            next();
+          }
+        }
+      }
     },
     {
       sequelize,

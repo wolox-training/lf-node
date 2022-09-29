@@ -16,6 +16,7 @@ module.exports = {
     invalidToken: 'it needs to be a valid token',
     emptyToken: 'a token is required',
     notAdmin: 'you do not have admin permissions',
-    rateNotFound: 'rate not found'
+    rateNotFound: 'error rating a weet',
+    rateNotSend: 'you needs to send a rate'
   }
 };
