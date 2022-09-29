@@ -5,7 +5,8 @@ const {
   getAllUsers,
   createAdmin,
   getWeet,
-  createWeet
+  createWeet,
+  createRating
 } = require('./controllers');
 const { validateUser, verifyJWT, validateRole } = require('./middlewares');
 
@@ -17,4 +18,5 @@ exports.init = app => {
   app.get('/allusers', verifyJWT, getAllUsers);
   app.post('/users/admin', verifyJWT, validateRole, createAdmin);
   app.post('/weets', verifyJWT, createWeet);
+  app.post('/weets/:id/ratings', verifyJWT, createRating);
 };
