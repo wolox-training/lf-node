@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           isValue: (value, next) => {
             if (value !== 1 && value !== -1) {
-              next(new Error('Email address already in use!'));
+              next(new Error('you need to rate with a valid value'));
             }
             next();
           }
