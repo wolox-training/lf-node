@@ -1,5 +1,5 @@
 const { createRate, findRate, updateRate } = require('../services/rates');
-const { HTTP_CODES, success } = require('../../config');
+const { HTTP_CODES, success, error } = require('../../config');
 
 exports.createRating = async (req, res) => {
   try {
@@ -14,6 +14,6 @@ exports.createRating = async (req, res) => {
     updateRate(rateObject);
     return res.status(HTTP_CODES.CREATED).json({ message: success.updated });
   } catch {
-    return res.status(HTTP_CODES.INTERNAL_ERROR).json({ message: 'user not found' });
+    return res.status(HTTP_CODES.INTERNAL_ERROR).json({ message: error.rateNotFound });
   }
 };
