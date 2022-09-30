@@ -5,6 +5,7 @@ const { pagParams } = require('../helpers/pagination');
 const hashpass = require('../helpers/user_password').hashPassword;
 
 exports.createUser = async userParams => {
+  console.log(userParams);
   info('Calling users.createUser');
   return user
     .create({
@@ -38,3 +39,10 @@ exports.updateAdmin = user_id =>
     info.error(error.message);
     throw databaseError(error.message);
   });
+
+exports.invalidateSessions = userData => {
+  info(`Calling users.invalidateUserSessions for user ${userData.id}`);
+  return user.update({ sessionsExpiredAt: Date.now() }).catch(error => {
+    throw databaseError(error.message);
+  });
+};
