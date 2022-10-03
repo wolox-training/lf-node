@@ -14,7 +14,7 @@ exports.signUp = (req, res) => {
       res.status(HTTP_CODES.CREATED).json({ message: success.created, token, email: req.body.email });
     })
     .catch(err => {
-      res.status(HTTP_CODES.BAD_REQUEST).json({ message: 'ERROR' });
+      res.status(HTTP_CODES.BAD_REQUEST).json({ message: err });
     });
 };
 
@@ -60,11 +60,4 @@ exports.createAdmin = async (req, res) => {
   } catch (err) {
     return res.status(HTTP_CODES.INTERNAL_ERROR).json(err);
   }
-};
-
-exports.getAllUsers = (req, res, next) => {
-  const { page, limit } = req.query;
-  findAll(page, limit)
-    .then(users => res.send({ users }))
-    .catch(next);
 };
