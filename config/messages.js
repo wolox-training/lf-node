@@ -12,7 +12,7 @@ module.exports = {
     passwordCharsMissing: 'must be at least 8 chars long',
     invalidEmail: 'that is not a valid email',
     notWoloxEmail: 'it needs to be a mail from wolox',
-    errorGetting: 'error getting a weet',
+    errorGettingWeet: 'error getting a weet',
     invalidToken: 'it needs to be a valid token',
     emptyToken: 'a token is required',
     notAdmin: 'you do not have admin permissions',

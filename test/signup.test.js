@@ -32,8 +32,11 @@ describe('POST /users', () => {
       .post('/users')
       .send(userParams.dataValues);
     expect(response.statusCode).toBe(400);
-    expect(response.body).toHaveProperty('internalCode', 'database_error');
-    expect(response.body).toHaveProperty('message', 'Validation error: Email address already in use!');
+    expect(response.body.message).toHaveProperty('internalCode', 'database_error');
+    expect(response.body.message).toHaveProperty(
+      'message',
+      'Validation error: Email address already in use!'
+    );
   });
   it('responds with expected error status code and internal_code when there is one of the required params missing', async () => {
     const params = ['firstName', 'lastName', 'email', 'password'];
