@@ -22,8 +22,8 @@ exports.signUp = (req, res) => {
       });
       res.status(HTTP_CODES.CREATED).json({ message: success.created, token, email: req.body.email });
     })
-    .catch(() => {
-      res.status(HTTP_CODES.BAD_REQUEST).json({ message: error.userNotCreated });
+    .catch(err => {
+      res.status(HTTP_CODES.BAD_REQUEST).json(err);
     });
 };
 

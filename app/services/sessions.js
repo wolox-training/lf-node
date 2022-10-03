@@ -24,7 +24,6 @@ exports.invalidateSession = id => {
 };
 
 exports.updateSession = (id, token) => {
-  console.log(token, id);
   sessions.update({ token }, { where: { userId: id } }).catch(error => {
     info.error(error.message);
     throw databaseError(error.message);

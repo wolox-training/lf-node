@@ -5,7 +5,6 @@ const { pagParams } = require('../helpers/pagination');
 const hashpass = require('../helpers/user_password').hashPassword;
 
 exports.createUser = async userParams => {
-  console.log(userParams);
   info('Calling users.createUser');
   return user
     .create({

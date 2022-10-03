@@ -17,6 +17,7 @@ module.exports = {
     emptyToken: 'a token is required',
     notAdmin: 'you do not have admin permissions',
     rateNotFound: 'error rating a weet',
-    rateNotSend: 'you needs to send a rate'
+    rateNotSend: 'you needs to send a rate',
+    sessionNotExist: 'the session does not exist'
   }
 };
