@@ -2,13 +2,6 @@ const { createWeet, getPhrase, findAllWeets } = require('../services');
 const { HTTP_CODES, success, error } = require('../../config');
 const { info } = require('../logger');
 
-exports.getWeet = async (req, res) => {
-  info('weets.getWeet');
-  const phrase = await getPhrase();
-  console.log(phrase);
-  res.status(HTTP_CODES.SUCCESS).send(phrase);
-};
-
 exports.createWeet = async (req, res) => {
   try {
     info('weets.createWeet');
