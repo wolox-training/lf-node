@@ -4,7 +4,6 @@ const {
   signIn,
   getAllUsers,
   createAdmin,
-  getWeet,
   createWeet,
   createRating,
   indexWeets
@@ -15,7 +14,6 @@ exports.init = app => {
   app.get('/health', healthCheck);
   app.post('/users', validateUser, signUp);
   app.post('/users/sessions', signIn);
-  app.get('/randomWeet', getWeet);
   app.get('/allusers', verifyJWT, getAllUsers);
   app.post('/users/admin', verifyJWT, validateRole, createAdmin);
   app.post('/weets', verifyJWT, createWeet);
