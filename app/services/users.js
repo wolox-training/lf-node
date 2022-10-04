@@ -1,7 +1,7 @@
 const user = require('../models/index').Users;
 const { info } = require('../logger');
 const { databaseError } = require('../errors');
-const { pag_params } = require('../helpers/pagination');
+const { pagParams } = require('../helpers/pagination');
 const hashpass = require('../helpers/user_password').hashPassword;
 
 exports.createUser = async userParams => {
@@ -27,7 +27,7 @@ exports.findUser = emailfind => {
 };
 exports.findAll = (page = 1, limit = 10) =>
   user
-    .findAll({ ...pag_params(page, limit), attributes: ['id', 'firstName', 'lastName', 'email'] })
+    .findAll({ ...pagParams(page, limit), attributes: ['id', 'firstName', 'lastName', 'email'] })
     .catch(error => {
       info.error(error.message);
       throw databaseError(error.message);
