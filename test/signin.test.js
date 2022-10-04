@@ -1,7 +1,7 @@
 'use strict';
 const request = require('supertest');
 const app = require('../app');
-const userFactory = require('./factory/userFactory');
+const { userFactory } = require('./factory');
 const { hashPassword } = require('../app/helpers/user_password');
 
 const defaultPassword = '12345678t';

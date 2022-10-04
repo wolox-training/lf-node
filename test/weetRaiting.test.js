@@ -2,9 +2,7 @@
 const request = require('supertest');
 const jwt = require('jsonwebtoken');
 const app = require('../app');
-const userFactory = require('./factory/userFactory');
-const weetFactory = require('./factory/weetFactory.js');
-const sessionFactory = require('./factory/sessionFactory.js');
+const { userFactory, weetFactory, sessionFactory } = require('./factory');
 
 describe('POST /users', () => {
   it('responds with a success status code when i try to rate a weet for the first time', async () => {

@@ -2,8 +2,7 @@
 const request = require('supertest');
 const jwt = require('jsonwebtoken');
 const app = require('../app');
-const userFactory = require('./factory/userFactory');
-const sessionFactory = require('./factory/sessionFactory');
+const { userFactory, sessionFactory } = require('./factory');
 const objects = require('../config/userObjects');
 
 describe('POST /users', () => {
