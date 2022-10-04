@@ -1,7 +1,7 @@
 'use strict';
 const request = require('supertest');
 const app = require('../app');
-const userFactory = require('./factory/userFactory');
+const { userFactory } = require('./factory');
 const objects = require('../config/userObjects');
 
 describe('POST /users', () => {
