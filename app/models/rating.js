@@ -2,19 +2,19 @@
 const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  class Raiting extends Model {
+  class Rating extends Model {
     static associate(models) {
-      Raiting.belongsTo(models.Users, {
+      Rating.belongsTo(models.Users, {
         foreignKey: 'userId',
         target_keys: 'id'
       });
-      Raiting.belongsTo(models.Weets, {
+      Rating.belongsTo(models.Weets, {
         foreignKey: 'weetId',
         target_keys: 'id'
       });
     }
   }
-  Raiting.init(
+  Rating.init(
     {
       weetId: DataTypes.INTEGER,
       userId: DataTypes.INTEGER,
@@ -33,8 +33,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'Raiting'
+      modelName: 'Rating'
     }
   );
-  return Raiting;
+  return Rating;
 };

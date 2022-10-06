@@ -1,5 +1,6 @@
-const { createUser, findUser, findAll, updateAdmin } = require('./users');
+const { createUser, findUser, findAll, updateAdmin, updateUser } = require('./users');
 const { createWeet, findAllWeets } = require('./weets');
+const { createRate, findRate, updateRate, findWeetsRates, ratePosition } = require('./rates');
 const { getPhrase } = require('./friki_phrases');
 const { findSession, createSession, invalidateSession, updateSession } = require('./sessions');
 
@@ -14,5 +15,11 @@ module.exports = {
   createSession,
   invalidateSession,
   updateSession,
-  findAllWeets
+  findAllWeets,
+  createRate,
+  findRate,
+  updateRate,
+  findWeetsRates,
+  ratePosition,
+  updateUser
 };
