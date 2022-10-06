@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'userId',
         target_keys: 'id'
       });
-      Weets.hasMany(models.Raiting, {
+      Weets.hasMany(models.Rating, {
         foreignKey: 'id'
       });
     }
