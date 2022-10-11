@@ -2,15 +2,15 @@ const sessions = require('../models/index').Sessions;
 const { info } = require('../logger');
 const { databaseError } = require('../errors');
 
-exports.findSession = userData => {
-  info(`Calling users.CreateSession for user ${userData}`);
-  return sessions.findOne({ where: { userId: userData } }).catch(error => {
+exports.findSession = id => {
+  info(`Calling users.findSession for user ${id}`);
+  return sessions.findOne({ where: { userId: id } }).catch(error => {
     throw databaseError(error.message);
   });
 };
 
 exports.createSession = (id, token) => {
-  info(`Calling users.CreateSession for user ${id}`);
+  info(`Calling users.createSession for user ${id}`);
   return sessions.create({ userId: id, token }).catch(error => {
     throw databaseError(error.message);
   });

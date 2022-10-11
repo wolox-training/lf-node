@@ -39,9 +39,4 @@ exports.updateAdmin = user_id =>
     throw databaseError(error.message);
   });
 
-exports.invalidateSessions = userData => {
-  info(`Calling users.invalidateUserSessions for user ${userData.id}`);
-  return user.update({ sessionsExpiredAt: Date.now() }).catch(error => {
-    throw databaseError(error.message);
-  });
-};
+

@@ -13,11 +13,11 @@ exports.verifyJWT = (req, res, next) => {
     if (err) {
       return res.status(HTTP_CODES.NOT_FOUND).json({ message: error.invalidToken });
     }
-    const Session = await findSession(decoded.user.id);
-    if (!Session) {
+    const session = await findSession(decoded.user.id);
+    if (!session) {
       return res.status(HTTP_CODES.INTERNAL_ERROR).json({ message: error.sessionNotExist });
     }
-    if (Session.dataValues.token !== cleanToken) {
+    if (session.dataValues.token !== cleanToken) {
       return res.status(HTTP_CODES.NOT_FOUND).json({ message: error.invalidToken });
     }
     req.id = decoded.user.id;
