@@ -39,17 +39,15 @@ exports.signIn = async (req, res) => {
 
     if (bcrypt.compareSync(password, user.password)) {
       const userSession = await findSession(user.dataValues.id);
-
+      const token = signToken(user.dataValues.id, user.dataValues.email);
       if (!userSession) {
-        const token = await signToken(user.dataValues.id, user.dataValues.email);
         await createSession(user.dataValues.id, token);
         return res.status(HTTP_CODES.SUCCESS).json({ user: user.dataValues.firstName, token });
       }
-      const newToken = await signToken(user.dataValues.id, user.dataValues.email);
-      await updateSession(user.dataValues.id, newToken);
+      updateSession(user.dataValues.id, token);
       return res
         .status(HTTP_CODES.SUCCESS)
-        .json({ user: user.dataValues.firstName, token: newToken, message: success.updated });
+        .json({ user: user.dataValues.firstName, token, message: success.updated });
     }
     return res.status(HTTP_CODES.UNAUTHORIZED).json({ message: error.notFound });
   } catch (err) {
