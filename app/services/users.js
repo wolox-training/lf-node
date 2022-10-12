@@ -38,5 +38,3 @@ exports.updateAdmin = user_id =>
     info.error(error.message);
     throw databaseError(error.message);
   });
-
-
