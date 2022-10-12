@@ -20,5 +20,5 @@ exports.init = app => {
   app.post('/weets', verifyJWT, createWeet);
   app.post('/weets/:id/ratings', verifyJWT, createRating);
   app.get('/weets', verifyJWT, indexWeets);
-  app.get('/users/sessions/invalidate_all', verifyJWT, invalidateAllUserSessions);
+  app.post('/users/sessions/invalidate_all', verifyJWT, invalidateAllUserSessions);
 };
