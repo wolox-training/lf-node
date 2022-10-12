@@ -39,8 +39,9 @@ exports.updateAdmin = user_id =>
     throw databaseError(error.message);
   });
 
-exports.updateUser = (newPosition, user_id) =>
+exports.updateUser = (newPosition, user_id) => {
   user.update({ position: newPosition }, { where: { id: user_id } }).catch(error => {
     info.error(error.message);
     throw databaseError(error.message);
   });
+};
