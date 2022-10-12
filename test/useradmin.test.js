@@ -2,16 +2,17 @@
 const request = require('supertest');
 const jwt = require('jsonwebtoken');
 const app = require('../app');
-const userFactory = require('./factory/userFactory');
+const { userFactory, sessionFactory } = require('./factory');
 const objects = require('../config/userObjects');
 
 describe('POST /users', () => {
   it('responds with a success status code when i try to create a user with admin role', async () => {
     const admin = await userFactory.create({ role: 'admin' });
     const token = jwt.sign(
-      { user: { email: admin.dataValues.email, role: admin.dataValues.role } },
+      { user: { email: admin.dataValues.email, id: admin.dataValues.id } },
       process.env.AUTH_SECRET
     );
+    await sessionFactory.create({ userId: admin.dataValues.id, token });
     const response = await request(app)
       .post('/users/admin')
       .set({ Authorization: token })
@@ -23,9 +24,10 @@ describe('POST /users', () => {
     const admin = await userFactory.create({ role: 'admin' });
     const user = await userFactory.create();
     const token = jwt.sign(
-      { user: { email: admin.dataValues.email, role: admin.dataValues.role } },
+      { user: { email: admin.dataValues.email, id: admin.dataValues.id } },
       process.env.AUTH_SECRET
     );
+    await sessionFactory.create({ userId: admin.dataValues.id, token });
     const response = await request(app)
       .post('/users/admin')
       .set({ Authorization: token })
@@ -36,9 +38,10 @@ describe('POST /users', () => {
   it('responds with an error code when I try to create a user without having admin role', async () => {
     const admin = await userFactory.create();
     const token = jwt.sign(
-      { user: { email: admin.dataValues.email, role: admin.dataValues.role } },
+      { user: { email: admin.dataValues.email, id: admin.dataValues.id } },
       process.env.AUTH_SECRET
     );
+    await sessionFactory.create({ userId: admin.dataValues.id, token });
     const response = await request(app)
       .post('/users/admin')
       .set({ Authorization: token })
@@ -50,9 +53,10 @@ describe('POST /users', () => {
     const admin = await userFactory.create();
     const user = await userFactory.create();
     const token = jwt.sign(
-      { user: { email: admin.dataValues.email, role: admin.dataValues.role } },
+      { user: { email: admin.dataValues.email, id: admin.dataValues.id } },
       process.env.AUTH_SECRET
     );
+    await sessionFactory.create({ userId: admin.dataValues.id, token });
     const response = await request(app)
       .post('/users/admin')
       .set({ Authorization: token })

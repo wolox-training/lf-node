@@ -1,8 +1,17 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { info } = require('../logger');
-const { createUser, findUser, findAll, updateAdmin } = require('../services');
+const {
+  createUser,
+  findUser,
+  findAll,
+  updateAdmin,
+  findSession,
+  createSession,
+  updateSession
+} = require('../services');
 const { HTTP_CODES, success, error } = require('../../config');
+const { signToken } = require('../helpers/signToken');
 
 exports.signUp = (req, res) => {
   info('users.Sign-Up');
@@ -18,23 +27,32 @@ exports.signUp = (req, res) => {
     });
 };
 
-exports.signIn = (req, res) => {
+exports.signIn = async (req, res) => {
   info('users.Sign-In');
   const { email, password } = req.body;
-  return findUser(email)
-    .then(user => {
-      if (!user) {
-        return res.status(HTTP_CODES.NOT_FOUND).json({ message: error.notFound });
+  try {
+    const user = await findUser(email);
+
+    if (!user) {
+      return res.status(HTTP_CODES.NOT_FOUND).json({ message: error.notFound });
+    }
+
+    if (bcrypt.compareSync(password, user.password)) {
+      const userSession = await findSession(user.dataValues.id);
+      const token = signToken(user.dataValues.id, user.dataValues.email);
+      if (!userSession) {
+        await createSession(user.dataValues.id, token);
+        return res.status(HTTP_CODES.SUCCESS).json({ user: user.dataValues.firstName, token });
       }
-      if (bcrypt.compareSync(password, user.password)) {
-        const token = jwt.sign({ user }, process.env.AUTH_SECRET, {
-          expiresIn: process.env.AUTH_EXPIRES
-        });
-        return res.status(HTTP_CODES.SUCCESS).json({ user: user.firstName, token });
-      }
-      return res.status(HTTP_CODES.UNAUTHORIZED).json({ message: error.wrongPassword });
-    })
-    .catch(err => res.status(HTTP_CODES.INTERNAL_ERROR).json(err));
+      updateSession(user.dataValues.id, token);
+      return res
+        .status(HTTP_CODES.SUCCESS)
+        .json({ user: user.dataValues.firstName, token, message: success.updated });
+    }
+    return res.status(HTTP_CODES.UNAUTHORIZED).json({ message: error.notFound });
+  } catch (err) {
+    return res.status(HTTP_CODES.INTERNAL_ERROR).json(err);
+  }
 };
 
 exports.getAllUsers = (req, res, next) => {

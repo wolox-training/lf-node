@@ -4,9 +4,9 @@ module.exports = {
     updated: 'successfuly updated'
   },
   error: {
-    notFound: 'user not found',
+    notFound: 'The username or password are incorrect',
+    userNotCreated: 'user could not be created',
     weetNotCreated: 'the weet could not be created',
-    wrongPassword: 'password incorrect',
     empty: 'The field cannot be empty',
     nameCharsMissing: 'must be at least 3 chars long',
     passwordCharsMissing: 'must be at least 8 chars long',
@@ -17,6 +17,7 @@ module.exports = {
     emptyToken: 'a token is required',
     notAdmin: 'you do not have admin permissions',
     rateNotFound: 'error rating a weet',
-    rateNotSend: 'you needs to send a rate'
+    rateNotSend: 'you needs to send a rate',
+    sessionNotExist: 'the session does not exist'
   }
 };

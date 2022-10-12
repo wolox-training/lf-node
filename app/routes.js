@@ -6,7 +6,8 @@ const {
   createAdmin,
   createWeet,
   createRating,
-  indexWeets
+  indexWeets,
+  invalidateAllUserSessions
 } = require('./controllers');
 const { validateUser, verifyJWT, validateRole } = require('./middlewares');
 
@@ -19,4 +20,5 @@ exports.init = app => {
   app.post('/weets', verifyJWT, createWeet);
   app.post('/weets/:id/ratings', verifyJWT, createRating);
   app.get('/weets', verifyJWT, indexWeets);
+  app.post('/users/sessions/invalidate_all', verifyJWT, invalidateAllUserSessions);
 };

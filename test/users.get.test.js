@@ -2,7 +2,7 @@
 const request = require('supertest');
 const jwt = require('jsonwebtoken');
 const app = require('../app');
-const userFactory = require('./factory/userFactory');
+const { userFactory, sessionFactory } = require('./factory');
 
 describe('POST /users', () => {
   const defaultLimit = 1;
@@ -13,6 +13,7 @@ describe('POST /users', () => {
       { user: { email: user.dataValues.email, id: user.dataValues.id } },
       process.env.AUTH_SECRET
     );
+    await sessionFactory.create({ userId: user.dataValues.id, token });
     const response = await request(app)
       .get('/allusers')
       .set({ Authorization: token })
@@ -25,6 +26,7 @@ describe('POST /users', () => {
       { user: { email: user.dataValues.email, id: user.dataValues.id } },
       process.env.AUTH_SECRET
     );
+    await sessionFactory.create({ userId: user.dataValues.id, token });
     const response = await request(app)
       .get('/allusers')
       .set({ Authorization: token });
@@ -56,6 +58,7 @@ describe('POST /users', () => {
       { user: { email: user.dataValues.email, id: user.dataValues.id } },
       process.env.AUTH_SECRET
     );
+    await sessionFactory.create({ userId: user.dataValues.id, token });
     await userFactory.createMany(6);
     const response = await request(app)
       .get('/allusers')
