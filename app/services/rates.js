@@ -72,8 +72,8 @@ exports.ratePosition = weetId =>
       where: { weetId },
       attributes: ['weetId', 'userId']
     })
-    .then(data => {
-      return rating.findAll({
+    .then(data =>
+      rating.findAll({
         include: [
           {
             model: weet,
@@ -83,11 +83,11 @@ exports.ratePosition = weetId =>
             attributes: []
           }
         ],
-        attributes: ['Weet.userId',[sequelize.fn('sum', sequelize.col('score')), 'total']],
-        group: ['Weet.userId']
+        attributes: ['Weet.userId', [sequelize.fn('sum', sequelize.col('score')), 'total']],
+        group: ['Weet.userId'],
+        raw: true
       })
-    })
+    )
     .catch(error => {
       throw databaseError(error.message);
     });
-  
