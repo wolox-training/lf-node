@@ -1,7 +1,8 @@
 module.exports = {
   success: {
     created: 'successfuly created',
-    updated: 'successfuly updated'
+    updated: 'successfuly updated',
+    invalidate: 'invalidate sessions'
   },
   error: {
     notFound: 'The username or password are incorrect',

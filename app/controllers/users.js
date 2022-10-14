@@ -8,7 +8,8 @@ const {
   updateAdmin,
   findSession,
   createSession,
-  updateSession
+  updateSession,
+  sendMail
 } = require('../services');
 const { HTTP_CODES, success, error } = require('../../config');
 const { signToken } = require('../helpers/signToken');
@@ -20,6 +21,7 @@ exports.signUp = (req, res) => {
       const token = jwt.sign({ user }, process.env.AUTH_SECRET, {
         expiresIn: process.env.AUTH_EXPIRES
       });
+      sendMail(user);
       res.status(HTTP_CODES.CREATED).json({ message: success.created, token, email: req.body.email });
     })
     .catch(err => {
