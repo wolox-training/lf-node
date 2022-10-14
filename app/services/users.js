@@ -3,6 +3,7 @@ const { info } = require('../logger');
 const { databaseError } = require('../errors');
 const { pagParams } = require('../helpers/pagination');
 const hashpass = require('../helpers/user_password').hashPassword;
+const emailer = require('../../config/emailer');
 
 exports.createUser = async userParams => {
   info('Calling users.createUser');
@@ -44,4 +45,18 @@ exports.updateUser = (newPosition, user_id) => {
     info.error(error.message);
     throw databaseError(error.message);
   });
+};
+
+exports.sendMail = async userData => {
+  const transporter = emailer.createTrans();
+  await transporter
+    .sendMail({
+      from: '"Lucas Foo"<foo@example.com>',
+      to: userData.email,
+      subject: 'Welcome to weeter',
+      html: '<b>HELLO AND WELCOME TO WEETER!!</b>'
+    })
+    .catch(error => {
+      info(error.message);
+    });
 };
