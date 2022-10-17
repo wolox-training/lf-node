@@ -49,9 +49,9 @@ exports.updateUser = (newPosition, user_id) => {
 
 exports.sendMail = async userData => {
   const transporter = emailer.createTrans();
-  await transporter
+  const infoEmail = await transporter
     .sendMail({
-      from: '"Lucas Foo"<foo@example.com>',
+      from: '"Weeter"<weeter@wolox.com>',
       to: userData.email,
       subject: 'Welcome to weeter',
       html: '<b>HELLO AND WELCOME TO WEETER!!</b>'
@@ -59,4 +59,5 @@ exports.sendMail = async userData => {
     .catch(error => {
       info(error.message);
     });
+  return infoEmail.accepted;
 };

@@ -1,5 +1,4 @@
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const { info } = require('../logger');
 const {
   createUser,
@@ -14,19 +13,15 @@ const {
 const { HTTP_CODES, success, error } = require('../../config');
 const { signToken } = require('../helpers/signToken');
 
-exports.signUp = (req, res) => {
+exports.signUp = async (req, res) => {
   info('users.Sign-Up');
-  createUser(req.body)
-    .then(user => {
-      const token = jwt.sign({ user }, process.env.AUTH_SECRET, {
-        expiresIn: process.env.AUTH_EXPIRES
-      });
-      sendMail(user);
-      res.status(HTTP_CODES.CREATED).json({ message: success.created, token, email: req.body.email });
-    })
-    .catch(err => {
-      res.status(HTTP_CODES.BAD_REQUEST).json({ message: err });
-    });
+  try {
+    const user = await createUser(req.body);
+    const infoEmail = await sendMail(user);
+    res.status(HTTP_CODES.CREATED).json({ message: success.created, email: req.body.email, infoEmail });
+  } catch (err) {
+    res.status(HTTP_CODES.BAD_REQUEST).json({ message: err });
+  }
 };
 
 exports.signIn = async (req, res) => {
