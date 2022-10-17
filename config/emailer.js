@@ -5,8 +5,8 @@ exports.createTrans = () => {
     host: 'smtp.mailtrap.io',
     port: 2525,
     auth: {
-      user: "fd7ab089cc9ae8",
-      pass: "749d561f596711"
+      user: process.env.USER_MAILTRAP,
+      pass: process.env.PASSWORD_MAILTRAP
     }
   });
   return transport;
