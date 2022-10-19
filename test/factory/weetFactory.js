@@ -2,7 +2,7 @@ const { factory } = require('factory-girl');
 const weet = require('../../app/models').Weets;
 
 factory.define('weet', weet, () => ({
-  UserId: 1,
+  userId: 1,
   content: 'Esto es un weet'
 }));
 

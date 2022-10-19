@@ -18,6 +18,7 @@ module.exports = {
     notAdmin: 'you do not have admin permissions',
     rateNotFound: 'error rating a weet',
     rateNotSend: 'you needs to send a rate',
-    sessionNotExist: 'the session does not exist'
+    sessionNotExist: 'the session does not exist',
+    sameRate: 'can not send the same rating'
   }
 };

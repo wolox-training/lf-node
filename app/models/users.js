@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       Users.hasMany(models.Weets, {
         foreignKey: 'id'
       });
-      Users.hasMany(models.Raiting, {
+      Users.hasMany(models.Rating, {
         foreignKey: 'id'
       });
       Users.hasMany(models.Sessions, {
@@ -90,6 +90,12 @@ module.exports = (sequelize, DataTypes) => {
         values: ['user', 'admin'],
         allowNull: false,
         defaultValue: 'user'
+      },
+      position: {
+        type: DataTypes.ENUM,
+        values: ['DEV', 'LEAD', 'TL', 'EM', 'HEAD', 'CEO'],
+        allowNull: false,
+        defaultValue: 'DEV'
       }
     },
     {
