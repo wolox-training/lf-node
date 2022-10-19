@@ -1,15 +1,15 @@
 const { check } = require('express-validator');
 const { validateResult } = require('../helpers/validate');
-const { error } = require('../../config/messages');
+const { error } = require('../../config');
 
-exports.validateCreate = [
+exports.validateUser = [
   check('firstName')
     .exists()
     .not()
     .isEmpty()
     .withMessage(error.empty)
     .isAlphanumeric()
-    .isLength({ min: 3 })
+    .isLength({ min: 2 })
     .withMessage(error.nameCharsMissing),
   check('lastName')
     .exists()
@@ -17,7 +17,7 @@ exports.validateCreate = [
     .isEmpty()
     .withMessage(error.empty)
     .isAlphanumeric()
-    .isLength({ min: 3 })
+    .isLength({ min: 2 })
     .withMessage(error.nameCharsMissing),
   check('email')
     .exists()

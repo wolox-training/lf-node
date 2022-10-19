@@ -2,7 +2,19 @@
 const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  class Users extends Model {}
+  class Users extends Model {
+    static associate(models) {
+      Users.hasMany(models.Weets, {
+        foreignKey: 'id'
+      });
+      Users.hasMany(models.Raiting, {
+        foreignKey: 'id'
+      });
+      Users.hasMany(models.Sessions, {
+        foreignKey: 'id'
+      });
+    }
+  }
   Users.init(
     {
       firstName: {
@@ -72,6 +84,12 @@ module.exports = (sequelize, DataTypes) => {
             msg: 'The password must be between 8 and 255 characters'
           }
         }
+      },
+      role: {
+        type: DataTypes.ENUM,
+        values: ['user', 'admin'],
+        allowNull: false,
+        defaultValue: 'user'
       }
     },
     {
