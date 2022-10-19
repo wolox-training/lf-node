@@ -8,7 +8,7 @@ const {
   findSession,
   createSession,
   updateSession,
-  sendMail
+  sendWelcomeMail
 } = require('../services');
 const { HTTP_CODES, success, error } = require('../../config');
 const { signToken } = require('../helpers/signToken');
@@ -17,7 +17,7 @@ exports.signUp = async (req, res) => {
   info('users.Sign-Up');
   try {
     const user = await createUser(req.body);
-    const infoEmail = await sendMail(user);
+    const infoEmail = await sendWelcomeMail(user);
     res.status(HTTP_CODES.CREATED).json({ message: success.created, email: req.body.email, infoEmail });
   } catch (err) {
     res.status(HTTP_CODES.BAD_REQUEST).json({ message: err });
